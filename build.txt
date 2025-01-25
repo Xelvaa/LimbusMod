@@ -1,0 +1,3 @@
+displayName = Limbus Debuffs Mod
+author = Xelvaa
+version = 0.1

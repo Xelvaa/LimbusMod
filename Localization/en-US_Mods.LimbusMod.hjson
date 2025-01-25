@@ -1,0 +1,28 @@
+Items.VanillaItems.CobaltSword: Inflicts 2 rupture
+
+Buffs: {
+	RuptureDebuff: {
+		Description: Mods.LimbusMod.Buffs.RuptureDebuff.Description
+		DisplayName: Rupture Debuff
+	}
+
+	TremorDebuff: {
+		Description: Mods.LimbusMod.Buffs.TremorDebuff.Description
+		DisplayName: Tremor Debuff
+	}
+
+	SinkingDebuff: {
+		Description: Mods.LimbusMod.Buffs.SinkingDebuff.Description
+		DisplayName: Sinking Debuff
+	}
+
+	ChargeBuff: {
+		Description: Mods.LimbusMod.Buffs.ChargeBuff.Description
+		DisplayName: Charge Buff
+	}
+
+	BleedDebuff: {
+		Description: Mods.LimbusMod.Buffs.BleedDebuff.Description
+		DisplayName: Bleed Debuff
+	}
+}
