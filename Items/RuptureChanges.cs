@@ -14,25 +14,26 @@ namespace LimbusMod.Items
         {
             if (item.type == ItemID.CobaltSword)
             {
-                // Add 3 rupture potency
+                // Add 2 rupture potency
                 var ruptureNPC = target.GetGlobalNPC<RuptureNPC>();
-                ruptureNPC.rupturePotency = Math.Min(ruptureNPC.rupturePotency + 3, 40); 
+                ruptureNPC.rupturePotency = Math.Min(ruptureNPC.rupturePotency + 2, 40); 
             }
 
             if (item.type == ItemID.DD2SquireDemonSword)
             {
                 // Add 2 rupture count
                 var ruptureNPC = target.GetGlobalNPC<RuptureNPC>();
-                ruptureNPC.ruptureCount = Math.Min(ruptureNPC.ruptureCount + 2, 35); 
+                ruptureNPC.ruptureCount = Math.Min(ruptureNPC.ruptureCount + 2, 30); 
             }
 
             if (item.type == ItemID.EnchantedSword)
             {
                 var ruptureNPC = target.GetGlobalNPC<RuptureNPC>();
-                ruptureNPC.ruptureCount = Math.Min(ruptureNPC.ruptureCount + 2, 15); 
+                ruptureNPC.ruptureCount = Math.Min(ruptureNPC.ruptureCount + 2, 25); 
             }
         }
     }
+    
     public class RuptureProjectile : GlobalProjectile
     {
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
@@ -41,6 +42,11 @@ namespace LimbusMod.Items
             {
                 var ruptureNPC = target.GetGlobalNPC<RuptureNPC>();
                 ruptureNPC.rupturePotency = Math.Min(ruptureNPC.rupturePotency + 1, 10); 
+            }
+            if (projectile.type == ProjectileID.CobaltNaginata) 
+            {
+                var ruptureNPC = target.GetGlobalNPC<RuptureNPC>();
+                ruptureNPC.ruptureCount = Math.Min(ruptureNPC.ruptureCount + 2, 30); 
             }
         }
     }
