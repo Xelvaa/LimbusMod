@@ -12,7 +12,6 @@ namespace LimbusMod.NPCs
         // rupture variables
         public int rupturePotency = 0; // potency
         public int ruptureCount = 0;  // count
-        private int ruptureTimer = 0; // reset rupture count
 
         public override void ResetEffects(NPC npc)
         {
@@ -23,25 +22,11 @@ namespace LimbusMod.NPCs
             if (ruptureCount <= 0)
             {
                 rupturePotency = 0;
-                ruptureTimer = 0;
             }
         }
 
         public override void AI(NPC npc)
         {
-            // reduce rupture timer if rupture count not applied
-            if (ruptureCount > 0)
-            {
-                ruptureTimer++;
-
-                // after 10 seconds, reset rupture
-                if (ruptureTimer >= 600)
-                {
-                    rupturePotency = 0;
-                    ruptureCount = 0;
-                    ruptureTimer = 0;
-                }
-            }
         }
 
         public override void ModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
@@ -60,9 +45,6 @@ namespace LimbusMod.NPCs
             {
                 // reduce rupture count
                 ruptureCount--;
-
-                // Reset the timer
-                ruptureTimer = 0;
 
                 // fixed damage from potency
                 int trueDamage = rupturePotency; 

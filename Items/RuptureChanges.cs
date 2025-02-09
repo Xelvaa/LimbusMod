@@ -16,7 +16,7 @@ namespace LimbusMod.Items
             {
                 // Add 2 rupture potency
                 var ruptureNPC = target.GetGlobalNPC<RuptureNPC>();
-                ruptureNPC.rupturePotency = Math.Min(ruptureNPC.rupturePotency + 2, 40); 
+                ruptureNPC.rupturePotency = Math.Min(ruptureNPC.rupturePotency + 2, 35); 
             }
 
             if (item.type == ItemID.DD2SquireDemonSword)

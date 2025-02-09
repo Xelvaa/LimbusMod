@@ -1,11 +1,15 @@
 Mods: {
 	LimbusMod: {
 		CommonItemTooltip: {
-			RupturePotency: Inflict {0} [c/00ffd4:Rupture] potency
-			RuptureCount: Inflict {0} [c/00ffd4:Rupture] count
 			TremorPotency: Inflict {0} [c/fff014:Tremor] potency
 			TremorCount: Inflict {0} [c/fff014:Tremor] count
 			TremorBurst: "{0}% chance to trigger [c/fff014:Tremor] burst"
+			RupturePotency: Inflict {0} [c/00ffd4:Rupture] potency
+			RuptureCount: Inflict {0} [c/00ffd4:Rupture] count
+			SinkingPotency: Inflict {0} [c/0000ff:Sinking] potency
+			SinkingCount: Inflict {0} [c/0000ff:Sinking] count
+			BurnPotency: Inflict {0} [c/ff0000:Burn] potency
+			BurnCount: Inflict {0} [c/ff0000:Burn] count
 		}
 
 		Items: {

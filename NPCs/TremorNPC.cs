@@ -26,25 +26,11 @@ namespace LimbusMod.NPCs
             if (tremorCount <= 0)
             {
                 tremorPotency = 0;
-                tremorTimer = 0;
             }
         }
 
         public override void AI(NPC npc)
         {
-            // Reduce tremor timer if tremor count is still active
-            if (tremorCount > 0)
-            {
-                tremorTimer++;
-
-                // After 15 seconds, reset tremor
-                if (tremorTimer >= 900)
-                {
-                    tremorPotency = 0;
-                    tremorCount = 0;
-                    tremorTimer = 0;
-                }
-            }
         }
 
         // Apply the Tremor debuff through item or projectile hits
@@ -56,27 +42,36 @@ namespace LimbusMod.NPCs
         public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
         {
             ApplyTremor(npc, ref modifiers);
-        }
+        }   
+        
+        private int previousTremorPotency = 0;
+        private int previousTremorCount = 0;
 
         private void ApplyTremor(NPC npc, ref NPC.HitModifiers modifiers)
         {
-
-            tremorTimer = 0;
 
             if (tremorPotency <= 0 && tremorCount <= 0)
             {
                 return;
             }
 
-            if (tremorPotency > 0)
+            if (tremorPotency > 0)                
             {
+                if (tremorPotency != previousTremorPotency)                
+                {             
                 CombatText.NewText(npc.Hitbox, Color.Yellow, tremorPotency, true);
+                previousTremorPotency = tremorPotency; 
+                }
             }
 
             if (tremorCount > 0)
             {
+                if (tremorCount != previousTremorCount)                
+                {   
                 Rectangle textPosition = new Rectangle(npc.Hitbox.X, npc.Hitbox.Bottom + 100, npc.Hitbox.Width, 10);
                 CombatText.NewText(textPosition, Color.Orange, tremorCount, true);
+                previousTremorCount = tremorCount;
+                }
             }
         }
 
