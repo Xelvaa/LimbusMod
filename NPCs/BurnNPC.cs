@@ -2,6 +2,9 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Terraria.GameContent;
+using ReLogic.Graphics; 
 
 namespace LimbusMod.NPCs
 {
@@ -13,9 +16,6 @@ namespace LimbusMod.NPCs
         public int burnPotency = 0; // Potency
         public int burnCount = 0;  // Count
         private int burnTimer = 0; // Timer to trigger burn damage
-
-        private int previousBurnPotency = 0;
-        private int previousBurnCount = 0;
 
         public override void ResetEffects(NPC npc)
         {
@@ -29,8 +29,6 @@ namespace LimbusMod.NPCs
                 burnPotency = 0;
                 burnTimer = 0;
             }
-
-            DisplayBurnInfo(npc);
         }
 
         public override void AI(NPC npc)
@@ -39,31 +37,12 @@ namespace LimbusMod.NPCs
             {
                 burnTimer++;
 
-                // displays immediately the values when they are changed 
-                DisplayBurnInfo(npc);
-
                 // Trigger burn damage every 3 seconds (180 ticks)
                 if (burnTimer >= 180)
                 {
                     ApplyBurn(npc);
                     burnTimer = 0; // Reset timer after applying burn
                 }
-            }
-        }
-
-        private void DisplayBurnInfo(NPC npc)
-        {
-            if (burnPotency != previousBurnPotency)
-            {
-                CombatText.NewText(npc.Hitbox, Color.OrangeRed, burnPotency, true);
-                previousBurnPotency = burnPotency;
-            }
-
-            if (burnCount != previousBurnCount)
-            {
-                Rectangle textPosition = new Rectangle(npc.Hitbox.X, npc.Hitbox.Bottom + 100, npc.Hitbox.Width, 10);
-                CombatText.NewText(textPosition, Color.Orange, burnCount, true);
-                previousBurnCount = burnCount;
             }
         }
 
@@ -80,13 +59,13 @@ namespace LimbusMod.NPCs
                 int burnDamage = burnPotency;
                 npc.life -= burnDamage;
 
-                // particules
+                // Particules
                 for (int i = 0; i < 5; i++)
                 {
-                    Dust.NewDust(npc.position, npc.width, npc.height, DustID.Torch, 0f, 0f, 0, Color.OrangeRed, 1.5f);
+                    Dust.NewDust(npc.position, npc.width, npc.height, DustID.Torch, 0f, 0f, 0, Color.Red, 1.5f);
                 }
 
-                // displays the burn damage
+                // damage displayed
                 CombatText.NewText(npc.Hitbox, Color.Red, burnDamage, true);
             }
 
@@ -95,6 +74,29 @@ namespace LimbusMod.NPCs
                 burnPotency = 0;
             }
         }
+
+        // Draw the burn count/potency counter
+        public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            if (burnCount > 0 || burnPotency > 0) // displays only if the target is burn
+            {
+                string burnText = $"{burnPotency} / {burnCount}";
+                DynamicSpriteFont font = FontAssets.MouseText.Value; // Recup the font
+                float scale = 1.35f; 
+                Vector2 textSize = font.MeasureString(burnText) * scale;
+
+                // fix the position under the entity
+                Vector2 textPosition = npc.Bottom - Main.screenPosition;
+                textPosition.Y += 10; 
+                textPosition.X -= textSize.X / 2; 
+
+                // text
+                spriteBatch.DrawString(font, burnText, textPosition, Color.Red, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+            }
+        }
     }
 }
+
+
+
 

@@ -5,6 +5,8 @@ using Terraria.ID;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.DataStructures;
+using Terraria.GameContent;
+using ReLogic.Graphics; 
 
 namespace LimbusMod.NPCs
 {
@@ -37,8 +39,8 @@ namespace LimbusMod.NPCs
             // reduce sinking timer if sinking count not applied
             if (sinkingPotency > 0)
             {
-                float speedReduction = sinkingPotency * -0.002f;   // -0.75% speed per potency 
-                npc.velocity *= (1f + speedReduction);  // Applique la réduction de vitesse
+                float speedReduction = sinkingPotency * -0.001f;   // reduce speed by potency
+                npc.velocity *= (1f + speedReduction);  
             }
         }
 
@@ -76,19 +78,6 @@ namespace LimbusMod.NPCs
                 {
                     Dust.NewDust(npc.position, npc.width, npc.height, 33, 0f, 0f, 0, Color.Blue, 1.5f);
                 }
-
-                // Show sinking potency and count
-                if (sinkingPotency != previousSinkingPotency)  
-                {
-                    CombatText.NewText(npc.Hitbox, Color.Blue, sinkingPotency, true);
-                    previousSinkingPotency = sinkingPotency; 
-                }
-
-                if (sinkingCount > 0)
-                {
-                    Rectangle textPosition = new Rectangle(npc.Hitbox.X, npc.Hitbox.Bottom + 100, npc.Hitbox.Width, 10);
-                    CombatText.NewText(textPosition, Color.Blue, sinkingCount, true);
-                }
             }
 
             if (sinkingCount == 1)
@@ -99,6 +88,25 @@ namespace LimbusMod.NPCs
             if (sinkingCount <= 0)
             {
                 sinkingPotency = 0;
+            }
+        }
+
+        public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            if (sinkingCount > 0 || sinkingPotency > 0) // Display only if rupture is active
+            {
+                string sinkingText = $"{sinkingPotency} / {sinkingCount}";
+                DynamicSpriteFont font = FontAssets.MouseText.Value; 
+                float scale = 1.35f;
+                Vector2 textSize = font.MeasureString(sinkingText) * scale;
+
+                // Position under the NPC with automatic stacking
+                Vector2 textPosition = npc.Bottom - Main.screenPosition;
+                textPosition.Y += 10; // Adjust height under the NPC
+                textPosition.X -= textSize.X / 2; 
+
+                // Draw the text
+                spriteBatch.DrawString(font, sinkingText, textPosition, Color.Blue, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
             }
         }
     }

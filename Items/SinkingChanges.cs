@@ -43,13 +43,20 @@ namespace LimbusMod.Items
             if (projectile.type == ProjectileID.Typhoon) 
             {
                 var sinkingNPC = target.GetGlobalNPC<SinkingNPC>();
-                sinkingNPC.sinkingCount = Math.Min(sinkingNPC.sinkingCount + 2, 45); 
+                sinkingNPC.sinkingCount = Math.Min(sinkingNPC.sinkingCount + 2, 45);  
             }
 
             if (projectile.type == ProjectileID.Bubble) 
             {
                 var sinkingNPC = target.GetGlobalNPC<SinkingNPC>();
                 sinkingNPC.sinkingPotency = Math.Min(sinkingNPC.sinkingPotency + 2, 45); 
+            }
+
+            if (projectile.type == ProjectileID.FinalFractal) 
+            {
+                var sinkingNPC = target.GetGlobalNPC<SinkingNPC>();
+                sinkingNPC.sinkingPotency = Math.Min(sinkingNPC.sinkingPotency + 10, 45); 
+                sinkingNPC.sinkingCount = Math.Min(sinkingNPC.sinkingCount + 10, 45);  
             }
         }
     }

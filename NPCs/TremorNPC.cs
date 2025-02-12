@@ -14,7 +14,6 @@ namespace LimbusMod.NPCs
         // Tremor variables
         public int tremorPotency = 0; // potency
         public int tremorCount = 0;   // count
-        private int tremorTimer = 0;  // Reset tremor count
 
         public override void ResetEffects(NPC npc)
         {
@@ -44,34 +43,12 @@ namespace LimbusMod.NPCs
             ApplyTremor(npc, ref modifiers);
         }   
         
-        private int previousTremorPotency = 0;
-        private int previousTremorCount = 0;
-
         private void ApplyTremor(NPC npc, ref NPC.HitModifiers modifiers)
         {
 
             if (tremorPotency <= 0 && tremorCount <= 0)
             {
                 return;
-            }
-
-            if (tremorPotency > 0)                
-            {
-                if (tremorPotency != previousTremorPotency)                
-                {             
-                CombatText.NewText(npc.Hitbox, Color.Yellow, tremorPotency, true);
-                previousTremorPotency = tremorPotency; 
-                }
-            }
-
-            if (tremorCount > 0)
-            {
-                if (tremorCount != previousTremorCount)                
-                {   
-                Rectangle textPosition = new Rectangle(npc.Hitbox.X, npc.Hitbox.Bottom + 100, npc.Hitbox.Width, 10);
-                CombatText.NewText(textPosition, Color.Orange, tremorCount, true);
-                previousTremorCount = tremorCount;
-                }
             }
         }
 
@@ -102,7 +79,7 @@ namespace LimbusMod.NPCs
                                 Dust dust = Dust.NewDustDirect(target.position, target.width, target.height, 64, 0f, 0f, 0, Color.Yellow, 0.75f);
                                 
                                 // Increase the scale of the dusts when the tremor potency is higher
-                                dust.scale = 0.75f + (trueDamage * 0.01f);
+                                dust.scale = 1f + (trueDamage * 0.005f);
 
                                 float velocityMultiplier = 2f + (trueDamage * 0.02f); 
                                 dust.velocity = new Vector2(
@@ -124,6 +101,25 @@ namespace LimbusMod.NPCs
 
                     tremorCount--;
                 }
+            }
+        }
+
+        public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            if (tremorCount > 0 || tremorPotency > 0) // displays only if the target has tremor
+            {
+                string tremorText = $"{tremorPotency} / {tremorCount}";
+                DynamicSpriteFont font = FontAssets.MouseText.Value; // Recup the font
+                float scale = 1.35f; 
+                Vector2 textSize = font.MeasureString(tremorText) * scale;
+
+                // fix the position under the entity
+                Vector2 textPosition = npc.Bottom - Main.screenPosition;
+                textPosition.Y += 10; 
+                textPosition.X -= textSize.X / 2; 
+
+                // text
+                spriteBatch.DrawString(font, tremorText, textPosition, Color.Yellow, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
             }
         }
     }
