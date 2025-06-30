@@ -4,16 +4,126 @@ Mods: {
 			// TremorPotency: Inflict {0} [c/fff014:Tremor] potency
 			// TremorCount: Inflict {0} [c/fff014:Tremor] count
 			// TremorBurst: "{0}% chance to trigger [c/fff014:Tremor] burst"
+			// RuptureMelee: The projectile inflicts {0} [c/00ffd4:Rupture] potency, true melee hits inflict {1} [c/00ffd4:Rupture] count
 			RupturePotency: Inflict {0} Rupture Potency
 			RuptureCount: Inflict {0} Rupture Count
+			// RupturePotencyChance: "{0}% chance to inflict 1 [c/00ffd4:Rupture] potency"
 			// SinkingPotency: Inflict {0} [c/0000ff:Sinking] potency
 			// SinkingCount: Inflict {0} [c/0000ff:Sinking] count
 			// BurnPotency: Inflict {0} [c/ff0000:Burn] potency
 			// BurnCount: Inflict {0} [c/ff0000:Burn] count
+			// BleedPotency: Inflict {0} [c/FFA500:Bleed] potency
+			// BleedCount: Inflict {0} [c/FFA500:Bleed] count
+			// Bows: The arrows fired inflict {0} [c/00ffd4:Rupture] potency
+			// NightEdge: If the target has 10+ [c/00ffd4:Rupture] potency, inflict Shadowflame and 1 [c/ff0000:Burn] potency
 		}
 
 		Items: {
 			VanillaItems: {
+			}
+
+			GlimpseOfFlames: {
+				// DisplayName: Glimpse of Flames
+				/* Tooltip:
+					'''
+					Consume half of [c/ff0000:Burn] Count on enemies with [c/ff0000:Burn] to deal ([c/ff0000:Burn] Potency x Consumed [c/ff0000:Burn] Count)/2 bonus damage
+					Targets lose ([c/ff0000:Burn] Count consumed by Glimpse of Flames)/2 defense
+					''' */
+			}
+
+			EnrapturingTrance: {
+				// DisplayName: Enrapturing Trance
+				/* Tooltip:
+					'''
+					10% increased damage and 5% increased critical strike chance on [c/00ffd4:Rupture] weapons
+					Inflict 3 [c/00ffd4:Rupture] Potency when hitting an enemy 
+					When [c/00ffd4:Rupture] Count on an enemy drops below 1, consume 10 [c/00ffd4:Rupture] Potency instead of [c/00ffd4:Rupture] Count
+					(This effect ends when [c/00ffd4:Rupture] Potency drops below 8)
+					If the target has less than 4 [c/00ffd4:Rupture] Count, inflict +1 more Count when inflicting [c/00ffd4:Rupture] Count
+					''' */
+			}
+
+			Ruin: {
+				// DisplayName: Ruin
+				/* Tooltip:
+					'''
+					increases [c/00ffd4:Rupture] damage by 20%
+					Reduces enemy damage and armor based on [c/00ffd4:Rupture] Potency
+					Inflict 2 [c/00ffd4:Rupture] Potency and 50% chance to inflict 1 [c/00ffd4:Rupture] Count when hitting an enemy
+					When hitting an enemy, has a 20% chance to apply [c/00ffd4:Rupture] damage to nearby enemies
+					''' */
+			}
+
+			ThornyRopeCuffs: {
+				// DisplayName: Thorny Rope Cuffs
+				/* Tooltip:
+					'''
+					If the target has less than 4 [c/00ffd4:Rupture] Count, inflict +1 more Count when inflicting [c/00ffd4:Rupture] Count
+					When [c/00ffd4:Rupture] Count on an enemy drops below 1, consume 10 [c/00ffd4:Rupture] Potency instead of [c/00ffd4:Rupture] Count
+					(This effect ends when [c/00ffd4:Rupture] Potency drops below 8)
+					''' */
+			}
+
+			TalismanBundle: {
+				// DisplayName: Talisman Bundle
+				/* Tooltip:
+					'''
+					Inflict 1 [c/00ffd4:Rupture] Potency when hitting an enemy
+					5% increased critical strike chance on [c/00ffd4:Rupture] weapons
+					''' */
+			}
+
+			StandardDutyBattery: {
+				// DisplayName: Standard Duty Battery
+				/* Tooltip:
+					'''
+					Inflict 2 [c/00ffd4:Rupture] Potency when hitting an enemy 
+					10% increased damage on [c/00ffd4:Rupture] weapons
+					''' */
+			}
+
+			BrokenRevolver: {
+				// DisplayName: Broken Revolver
+				// Tooltip: Reduces enemy damage and armor based on [c/00ffd4:Rupture] Potency
+			}
+
+			Thunderbranch: {
+				// DisplayName: Thunderbranch
+				// Tooltip: Inflict 1 [c/00ffd4:Rupture] Potency and 50% chance to inflict 1 [c/00ffd4:Rupture] Count when hitting an enemy
+			}
+
+			BoneStake: {
+				// DisplayName: Bone Stake
+				// Tooltip: increases [c/00ffd4:Rupture] damage by 20%
+			}
+
+			EerieEffigy: {
+				// DisplayName: Eerie Effigy
+				/* Tooltip:
+					'''
+					increases [c/00ffd4:Rupture] damage by 20%
+					Inflict 1 [c/00ffd4:Rupture] Potency when hitting an enemy
+					When hitting an enemy, has a 20% chance to apply [c/00ffd4:Rupture] damage to nearby enemies
+					''' */
+			}
+
+			ShardofApocalypse: {
+				// DisplayName: Shard of Apocalypse
+				/* Tooltip:
+					'''
+					Inflict 1 [c/00ffd4:Rupture] Potency when hitting an enemy
+					When hitting an enemy, has a 20% chance to apply [c/00ffd4:Rupture] damage to nearby enemies
+					''' */
+			}
+
+			Thrill: {
+				// DisplayName: Thrill
+				/* Tooltip:
+					'''
+					Enemies start with 4 [c/00ffd4:Rupture] Potency and 3 [c/00ffd4:Rupture] Count
+					Every 5 seconds, Inflict ([c/00ffd4:Rupture] Potency x [c/00ffd4:Rupture] Count) / 2 damage 
+					to enemies with 4+ [c/00ffd4:Rupture] then reduce [c/00ffd4:Rupture] Count by 2 
+					''' */
 			}
 		}
 

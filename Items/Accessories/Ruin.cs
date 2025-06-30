@@ -3,12 +3,11 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using LimbusMod.NPCs;
 using LimbusMod.Players;
-using LimbusMod.Items.Accessories;
 using Microsoft.Xna.Framework;
 
 namespace LimbusMod.Items.Accessories
 {
-    public class EnrapturingTrance : ModItem
+    public class Ruin : ModItem
     {
         public override void SetDefaults()
         {
@@ -21,21 +20,23 @@ namespace LimbusMod.Items.Accessories
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<RupturePlayer>().hasTalisman = true;
-            player.GetModPlayer<RupturePlayer>().hasThornyRopeCuffs = true;
-            player.GetModPlayer<RupturePlayer>().hasBattery = true;
+            player.GetModPlayer<RupturePlayer>().hasApocalypseShard = true;
+            player.GetModPlayer<RupturePlayer>().hasBoneStake = true;
+            player.GetModPlayer<RupturePlayer>().hasThunderbranch = true;
+            player.GetModPlayer<RupturePlayer>().hasRevolver = true;
         }
 
         public override void AddRecipes()
         {
             Recipe recipe = CreateRecipe();
-            recipe.AddIngredient(ModContent.ItemType<StandardDutyBattery>());
-            recipe.AddIngredient(ModContent.ItemType<ThornyRopeCuffs>());
-            recipe.AddIngredient(ModContent.ItemType<TalismanBundle>());
-            recipe.AddIngredient(ItemID.Ectoplasm, 10);
+            recipe.AddIngredient(ModContent.ItemType<EerieEffigy>());
+            recipe.AddIngredient(ModContent.ItemType<BrokenRevolver>());
+            recipe.AddIngredient(ModContent.ItemType<Thunderbranch>());
+            recipe.AddIngredient(ItemID.BeetleHusk, 4);
             recipe.AddTile(TileID.MythrilAnvil);
             recipe.Register();
         }
     }
 }
+   
 

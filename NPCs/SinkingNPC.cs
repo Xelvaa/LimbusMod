@@ -80,11 +80,6 @@ namespace LimbusMod.NPCs
                 }
             }
 
-            if (sinkingCount == 1)
-            {
-                sinkingPotency = 0;
-            }
-
             if (sinkingCount <= 0)
             {
                 sinkingPotency = 0;
@@ -93,7 +88,7 @@ namespace LimbusMod.NPCs
 
         public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            if (sinkingCount > 0 || sinkingPotency > 0) // Display only if rupture is active
+            if (sinkingCount > 0 || sinkingPotency > 0) // Display only if sinking is active
             {
                 string sinkingText = $"{sinkingPotency} / {sinkingCount}";
                 DynamicSpriteFont font = FontAssets.MouseText.Value; 

@@ -1,4 +1,4 @@
-using Terraria;
+/*using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using LimbusMod.Buffs;
@@ -16,20 +16,27 @@ namespace LimbusMod.Items
             {
                 // Add 2 burn potency
                 var burnNPC = target.GetGlobalNPC<BurnNPC>();
-                burnNPC.burnPotency = Math.Min(burnNPC.burnPotency + 3, 35); 
+                burnNPC.burnPotency += 3; 
             }
 
             if (item.type == ItemID.DD2SquireDemonSword)
             {
                 // Add 1 burn count
                 var burnNPC = target.GetGlobalNPC<BurnNPC>();
-                burnNPC.burnCount = Math.Min(burnNPC.burnCount + 1, 99); 
+                burnNPC.burnCount += 1; 
             }
 
-            if (item.type == ItemID.TheHorsemansBlade)
+            if (item.type == ItemID.TheHorsemansBlade) 
             {
                 var burnNPC = target.GetGlobalNPC<BurnNPC>();
-                burnNPC.burnPotency = Math.Min(burnNPC.burnPotency + 5, 25); 
+                burnNPC.burnPotency += 3; 
+            }
+
+            if (item.type == ItemID.AshWoodSword) 
+            {
+                var burnNPC = target.GetGlobalNPC<BurnNPC>();
+                burnNPC.burnPotency += 33; 
+                burnNPC.burnCount += 33; 
             }
         }
     }
@@ -41,18 +48,18 @@ namespace LimbusMod.Items
             if (projectile.type == ProjectileID.Flamelash) 
             {
                 var burnNPC = target.GetGlobalNPC<BurnNPC>();
-                burnNPC.burnPotency = Math.Min(burnNPC.burnPotency + 1, 99); 
+                burnNPC.burnPotency += 2;
             }
             if (projectile.type == ProjectileID.Sunfury) 
             {
                 var burnNPC = target.GetGlobalNPC<BurnNPC>();
-                burnNPC.burnCount = Math.Min(burnNPC.burnCount + 1, 99); 
+                burnNPC.burnCount += 1; 
             }
             if (projectile.type == ProjectileID.LunarFlare) 
             {
                 var burnNPC = target.GetGlobalNPC<BurnNPC>();
-                burnNPC.burnPotency = Math.Min(burnNPC.burnPotency + 1, 99); 
+                burnNPC.burnPotency += 1;
             }
         }
     }
-}
+}*/

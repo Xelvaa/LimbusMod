@@ -8,34 +8,31 @@ using Microsoft.Xna.Framework;
 
 namespace LimbusMod.Items.Accessories
 {
-    public class EnrapturingTrance : ModItem
+    public class EerieEffigy : ModItem
     {
         public override void SetDefaults()
         {
             Item.width = 32;
             Item.height = 32;
             Item.accessory = true;
-            Item.rare = ItemRarityID.Yellow;
-            Item.value = Item.buyPrice(0, 20, 0, 0);
+            Item.rare = ItemRarityID.Pink;
+            Item.value = Item.buyPrice(0, 15, 0, 0);
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<RupturePlayer>().hasTalisman = true;
-            player.GetModPlayer<RupturePlayer>().hasThornyRopeCuffs = true;
-            player.GetModPlayer<RupturePlayer>().hasBattery = true;
+            player.GetModPlayer<RupturePlayer>().hasApocalypseShard = true;
+            player.GetModPlayer<RupturePlayer>().hasBoneStake = true;
         }
 
         public override void AddRecipes()
         {
             Recipe recipe = CreateRecipe();
-            recipe.AddIngredient(ModContent.ItemType<StandardDutyBattery>());
-            recipe.AddIngredient(ModContent.ItemType<ThornyRopeCuffs>());
-            recipe.AddIngredient(ModContent.ItemType<TalismanBundle>());
-            recipe.AddIngredient(ItemID.Ectoplasm, 10);
+            recipe.AddIngredient(ModContent.ItemType<BoneStake>());
+            recipe.AddIngredient(ModContent.ItemType<ShardofApocalypse>());
+            recipe.AddIngredient(ItemID.SoulofFright, 5);
             recipe.AddTile(TileID.MythrilAnvil);
             recipe.Register();
         }
     }
 }
-

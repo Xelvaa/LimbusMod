@@ -1,4 +1,4 @@
-using Terraria;
+/*using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using LimbusMod.Buffs;
@@ -12,15 +12,18 @@ namespace LimbusMod.Items
     {
         public override void OnHitNPC(Item item, Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
+            var tremorNPC = target.GetGlobalNPC<TremorNPC>();
+
             if (item.type == ItemID.BreakerBlade)
             {   //33% chance to trigger tremor burst
-                TremorNPC.ApplyTremorBurstStatic(target, 0.33f, ref target.GetGlobalNPC<TremorNPC>().tremorPotency, ref target.GetGlobalNPC<TremorNPC>().tremorCount);
+                tremorNPC.tremorPotency += 1; 
+                TremorNPC.ApplyTremorBurstStatic(target, 0.5f, ref target.GetGlobalNPC<TremorNPC>().tremorPotency, ref target.GetGlobalNPC<TremorNPC>().tremorCount);
             }
 
             if (item.type == ItemID.AdamantiteSword)
             {
-                var tremorNPC = target.GetGlobalNPC<TremorNPC>();
-                tremorNPC.tremorPotency = Math.Min(tremorNPC.tremorPotency + 3, 50); 
+                tremorNPC.tremorPotency += 3; 
+                TremorNPC.ApplyTremorBurstStatic(target, 0.1f, ref target.GetGlobalNPC<TremorNPC>().tremorPotency, ref target.GetGlobalNPC<TremorNPC>().tremorCount);
             }
         }
     }
@@ -28,11 +31,18 @@ namespace LimbusMod.Items
     {
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
+            var tremorNPC = target.GetGlobalNPC<TremorNPC>();
+            
+            if (projectile.type == ProjectileID.NebulaArcanumExplosionShotShard) 
+            {
+                TremorNPC.ApplyTremorBurstStatic(target, 0.20f, ref target.GetGlobalNPC<TremorNPC>().tremorPotency, ref target.GetGlobalNPC<TremorNPC>().tremorCount);
+            }
+
             if (projectile.type == ProjectileID.MaceWhip) 
             {
-                var tremorNPC = target.GetGlobalNPC<TremorNPC>();
-                tremorNPC.tremorCount = Math.Min(tremorNPC.tremorCount + 1, 40); 
+                tremorNPC.tremorCount += 1; 
             }
         }
     }
 }
+*/

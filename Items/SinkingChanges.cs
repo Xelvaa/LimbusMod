@@ -1,4 +1,4 @@
-using Terraria;
+/*using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using LimbusMod.Buffs;
@@ -15,13 +15,13 @@ namespace LimbusMod.Items
             if (item.type == ItemID.PurpleClubberfish)
             {   
                 var sinkingNPC = target.GetGlobalNPC<SinkingNPC>();
-                sinkingNPC.sinkingPotency = Math.Min(sinkingNPC.sinkingPotency + 2, 45); 
+                sinkingNPC.sinkingPotency += 2; 
             }
 
             if (item.type == ItemID.Muramasa)
             {
                 var sinkingNPC = target.GetGlobalNPC<SinkingNPC>();
-                sinkingNPC.sinkingPotency = Math.Min(sinkingNPC.sinkingPotency + 2, 45); 
+                sinkingNPC.sinkingPotency += 2; 
             } 
         }
     }
@@ -32,32 +32,32 @@ namespace LimbusMod.Items
             if (projectile.type == ProjectileID.WaterStream) 
             {
                 var sinkingNPC = target.GetGlobalNPC<SinkingNPC>();
-                sinkingNPC.sinkingCount = Math.Min(sinkingNPC.sinkingCount + 2, 40);  
+                sinkingNPC.sinkingCount += 2;  
             }
             if (projectile.type == ProjectileID.WaterBolt) 
             {
                 var sinkingNPC = target.GetGlobalNPC<SinkingNPC>();
-                sinkingNPC.sinkingPotency = Math.Min(sinkingNPC.sinkingPotency + 2, 45); 
+                sinkingNPC.sinkingPotency += 2; 
             }
 
             if (projectile.type == ProjectileID.Typhoon) 
             {
                 var sinkingNPC = target.GetGlobalNPC<SinkingNPC>();
-                sinkingNPC.sinkingCount = Math.Min(sinkingNPC.sinkingCount + 2, 45);  
+                sinkingNPC.sinkingCount += 2; 
             }
 
             if (projectile.type == ProjectileID.Bubble) 
             {
                 var sinkingNPC = target.GetGlobalNPC<SinkingNPC>();
-                sinkingNPC.sinkingPotency = Math.Min(sinkingNPC.sinkingPotency + 2, 45); 
+                sinkingNPC.sinkingPotency += 2; 
             }
 
             if (projectile.type == ProjectileID.FinalFractal) 
             {
                 var sinkingNPC = target.GetGlobalNPC<SinkingNPC>();
-                sinkingNPC.sinkingPotency = Math.Min(sinkingNPC.sinkingPotency + 10, 45); 
-                sinkingNPC.sinkingCount = Math.Min(sinkingNPC.sinkingCount + 10, 45);  
+                sinkingNPC.sinkingPotency += 10; 
+                sinkingNPC.sinkingCount += 10; 
             }
         }
     }
-}
+}*/

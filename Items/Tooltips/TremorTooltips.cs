@@ -1,4 +1,4 @@
-using Terraria;
+/*using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
 using System.Collections.Generic;
@@ -12,17 +12,33 @@ namespace LimbusMod.Items.Tooltips
         {
             if (item.type == ItemID.BreakerBlade)
             {
-                int tremorBurst = 33; // Chance to trigger tremor burst
-                string text = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.TremorBurst", tremorBurst);
-                tooltips.Add(new TooltipLine(Mod, "Tremor", text)); 
+                int tremorPotency = 1;
+                int tremorBurst = 50; // Chance to trigger tremor burst
+                string PotencyText = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.TremorPotency", tremorPotency);
+                string BurstText = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.TremorBurst", tremorBurst);
+                tooltips.Add(new TooltipLine(Mod, "TremorPotency", PotencyText)); 
+                tooltips.Add(new TooltipLine(Mod, "TremorBurst", BurstText)); 
+            }
+
+            if (item.type == ItemID.NebulaArcanum)
+            {
+                int tremorPotency = 1;
+                int tremorBurst = 50; // Chance to trigger tremor burst
+                string PotencyText = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.TremorPotency", tremorPotency);
+                string BurstText = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.TremorBurst", tremorBurst);
+                tooltips.Add(new TooltipLine(Mod, "TremorPotency", PotencyText)); 
+                tooltips.Add(new TooltipLine(Mod, "TremorBurst", BurstText)); 
             }
             
             // Vérifier pour DD2SquireDemonSword
             if (item.type == ItemID.AdamantiteSword)
             {
                 int tremorPotency = 3;
-                string text = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.TremorPotency", tremorPotency);
-                tooltips.Add(new TooltipLine(Mod, "Tremor", text));
+                int tremorBurst = 10; // Chance to trigger tremor burst
+                string PotencyText = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.TremorPotency", tremorPotency);
+                string BurstText = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.TremorBurst", tremorBurst);
+                tooltips.Add(new TooltipLine(Mod, "TremorPotency", PotencyText)); 
+                tooltips.Add(new TooltipLine(Mod, "TremorBurst", BurstText)); 
             }
 
             if (item.type == ItemID.MaceWhip)
@@ -34,4 +50,4 @@ namespace LimbusMod.Items.Tooltips
         
         }
     }
-}
+}*/

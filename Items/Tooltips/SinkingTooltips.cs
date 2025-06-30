@@ -1,4 +1,4 @@
-using Terraria;
+/*using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
 using System.Collections.Generic;
@@ -53,4 +53,4 @@ namespace LimbusMod.Items.Tooltips
             }
         }
     }
-}
+}*/
