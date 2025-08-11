@@ -10,12 +10,26 @@ Mods: {
 			RupturePotencyChance: "{0}% chance to inflict 1 [c/00ffd4:Rupture] potency"
 			SinkingPotency: Inflict {0} [c/0000ff:Sinking] potency
 			SinkingCount: Inflict {0} [c/0000ff:Sinking] count
+			PoisePotency: Gain +{0} [c/0000ff:Poise] potency
+			PoiseCount: Gain +{0} [c/0000ff:Poise] count
 			BurnPotency: Inflict {0} [c/ff0000:Burn] potency
 			BurnCount: Inflict {0} [c/ff0000:Burn] count
 			BleedPotency: Inflict {0} [c/FFA500:Bleed] potency
 			BleedCount: Inflict {0} [c/FFA500:Bleed] count
 			Bows: The arrows fired inflict {0} [c/00ffd4:Rupture] potency
+			Guns: The bullets fired inflict {0} [c/00ffd4:Rupture] potency
 			NightEdge: If the target has 10+ [c/00ffd4:Rupture] potency, inflict Shadowflame and 1 [c/ff0000:Burn] potency
+			TrueNightEdge: If the target has 10+ [c/00ffd4:Rupture] potency, inflict Cursed Inferno and 2 [c/ff0000:Burn] potency
+			CobaltSword: Gain Armor Penetration on [c/00ffd4:Rupture] potency on the target / 2 (Max 20)
+			Excalibur: If the target has 4+ [c/00ffd4:Rupture] count, heal 1 hp on hit
+			TrueExcalibur: If the target has 4+ [c/00ffd4:Rupture] count, heal 1 hp and gain 2 [c/0000ff:Poise] potency and 1 [c/0000ff:Poise] count on hit
+			TerraBlade: If the target has 10+ [c/00ffd4:Rupture] potency, inflicts Dryad's Bane and heal 1 hp on true melee
+			Harp: If the target has 4+ [c/00ffd4:Rupture] count, deals 10% more damage and confuse the target
+			CrystalStorm: If the target has 10+ [c/00ffd4:Rupture] potency, inflicts Dryad's Bane and heal 1 hp on true melee
+			RuptureBoomerangs: If the target has {0}+ [c/00ffd4:Rupture] potency, deals 10% more damage
+			Shadowbeam: If the target has 15+ [c/00ffd4:Rupture] potency, Ignores 15 defense and inflicts Shadowflame
+			Code1: If the target has 4+ [c/00ffd4:Rupture] count, gain 1 [c/0000ff:Poise] potency on hit
+			Chik: If the target has 10+ [c/00ffd4:Rupture] potency, Deals 8% more damage and confuse the target
 		}
 
 		Items: {
@@ -47,10 +61,11 @@ Mods: {
 				DisplayName: Ruin
 				Tooltip:
 					'''
-					increases [c/00ffd4:Rupture] damage by 20%
+					increases [c/00ffd4:Rupture] damage by 15%
 					Reduces enemy damage and armor based on [c/00ffd4:Rupture] Potency
-					Inflict 2 [c/00ffd4:Rupture] Potency and 50% chance to inflict 1 [c/00ffd4:Rupture] Count when hitting an enemy
-					When hitting an enemy, has a 20% chance to apply [c/00ffd4:Rupture] damage to nearby enemies
+					Inflict 2 [c/00ffd4:Rupture] Potency and 60% chance to inflict 1 [c/00ffd4:Rupture] Count when hitting an enemy
+					Has a very small chance to inflict 3 [c/00ffd4:Rupture] Potency and 2 [c/00ffd4:Rupture] Count instead on hit 
+					When hitting an enemy, has a 25% chance to apply [c/00ffd4:Rupture] damage to nearby enemies
 					'''
 			}
 
@@ -89,21 +104,25 @@ Mods: {
 
 			Thunderbranch: {
 				DisplayName: Thunderbranch
-				Tooltip: Inflict 1 [c/00ffd4:Rupture] Potency and 50% chance to inflict 1 [c/00ffd4:Rupture] Count when hitting an enemy
+				Tooltip:
+					'''
+					Inflict 1 [c/00ffd4:Rupture] Potency and 60% chance to inflict 1 [c/00ffd4:Rupture] Count when hitting an enemy
+					Has a very small chance to inflict 2 [c/00ffd4:Rupture] Potency and Count instead on hit 
+					'''
 			}
 
 			BoneStake: {
 				DisplayName: Bone Stake
-				Tooltip: increases [c/00ffd4:Rupture] damage by 20%
+				Tooltip: increases [c/00ffd4:Rupture] damage by 15%
 			}
 
 			EerieEffigy: {
 				DisplayName: Eerie Effigy
 				Tooltip:
 					'''
-					increases [c/00ffd4:Rupture] damage by 20%
+					increases [c/00ffd4:Rupture] damage by 15%
 					Inflict 1 [c/00ffd4:Rupture] Potency when hitting an enemy
-					When hitting an enemy, has a 20% chance to apply [c/00ffd4:Rupture] damage to nearby enemies
+					When hitting an enemy, has a 25% chance to apply [c/00ffd4:Rupture] damage to nearby enemies
 					'''
 			}
 
@@ -112,7 +131,7 @@ Mods: {
 				Tooltip:
 					'''
 					Inflict 1 [c/00ffd4:Rupture] Potency when hitting an enemy
-					When hitting an enemy, has a 20% chance to apply [c/00ffd4:Rupture] damage to nearby enemies
+					When hitting an enemy, has a 25% chance to apply [c/00ffd4:Rupture] damage to nearby enemies
 					'''
 			}
 
@@ -151,6 +170,16 @@ Mods: {
 			BleedDebuff: {
 				Description: Mods.LimbusMod.Buffs.BleedDebuff.Description
 				DisplayName: Bleed Debuff
+			}
+
+			BurnDebuff: {
+				DisplayName: Burn Debuff
+				Description: Mods.LimbusMod.Buffs.BurnDebuff.Description
+			}
+
+			PoiseBuff: {
+				DisplayName: Poise Buff
+				Description: Mods.LimbusMod.Buffs.PoiseBuff.Description
 			}
 		}
 	}

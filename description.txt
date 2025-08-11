@@ -1,1 +1,6 @@
-Modify this file with a description of your mod.
+A mod that aims to add the seven major Limbus status effects to Terraria: Burn, Bleed, Tremor, Rupture, Sinking, Poise, and Charge.
+(Only Rupture is added for now.)
+
+Vanilla weapons can now have a dedicated archetype (for example, the Cobalt Sword inflicts 2 Rupture Potency)
+and new accessories, based on ego gifts, that buff weapons of an archetype or improve the application of a specific status effect.
+

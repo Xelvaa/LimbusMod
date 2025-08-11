@@ -8,7 +8,7 @@ using Terraria.DataStructures;
 namespace LimbusMod.NPCs
 {
     [Autoload(Side = ModSide.Both)]
-    public class SinkingProjectileGlobal : GlobalProjectile // Nom modifié pour éviter les conflits
+    public class SinkingProjectileGlobal : GlobalProjectile 
     {
         public override bool InstancePerEntity => true;
 

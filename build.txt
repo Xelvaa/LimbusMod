@@ -1,3 +1,3 @@
-displayName = Limbus Debuffs Mod
+displayName = Limbus Status Effects Mod
 author = Xelvaa
 version = 0.1

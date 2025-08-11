@@ -54,8 +54,6 @@ namespace LimbusMod.NPCs
             ApplySinking(npc, ref modifiers);
         }
 
-        private int previousSinkingPotency = 0;
-
         private void ApplySinking(NPC npc, ref NPC.HitModifiers modifiers)
         {
             if (sinkingCount > 0 || sinkingPotency > 0)

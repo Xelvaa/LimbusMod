@@ -38,38 +38,63 @@ namespace LimbusMod.Players
             hasApocalypseShard = false;
             hasRuin = false;
             hasThrill = false;
-
-        if (!hasThornyRopeCuffs)
+        }
+        
+        public override void PostUpdate()
+        {
+            if (hasThornyRopeCuffs)
             {
-                thornyRopeCuffsTimer = 0;
-                thornyRopeCuffsApplications = 0;
+                thornyRopeCuffsTimer++;
             }
         }
 
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (LimbusMod.LimbusModExclusions.ExcludedItems.Contains(item.type))
+            var ruptureNPC = target.GetGlobalNPC<RuptureNPC>();
+
+            if (ruptureNPC.ruptureApplicationCount >= 4)
             {
-                return; 
+                return;
             }
-            ApplyRuptureEffects(target, true, false); 
+
+            ApplyRuptureEffects(target, true, false);
         }
 
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
+            var ruptureNPC = target.GetGlobalNPC<RuptureNPC>();
+
             if (LimbusMod.LimbusModExclusions.ExcludedProjectiles.Contains(proj.type))
             {
-                return; 
+                return;
             }
 
-            if (LimbusMod.LimbusModExclusions.SemiExcludedProjectiles.Contains(proj.type))
+            if (ruptureNPC.ruptureApplicationCount >= 4)
             {
-                if (Main.rand.NextFloat() < 0.80f)
-                {
-                    return; 
-                } 
+                return;
             }
-            ApplyRuptureEffects(target, false, true); 
+
+            ApplyRuptureEffects(target, false, true);
+        }
+        
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            var ruptureNPC = target.GetGlobalNPC<RuptureNPC>();
+
+            if (hasThornyRopeCuffs)
+            {
+                if (thornyRopeCuffsApplications < 3)
+                {
+                    ruptureNPC.ruptureCount += 1;
+                    thornyRopeCuffsApplications++;
+                }
+                
+                if (thornyRopeCuffsTimer >= 720)
+                {
+                    thornyRopeCuffsApplications = 0;
+                    thornyRopeCuffsTimer = 0;
+                }     
+            }
         }
         
         private void ApplyRuptureEffects(NPC target, bool isFromWeapon, bool isFromProjectile)
@@ -92,15 +117,20 @@ namespace LimbusMod.Players
             {
                 ruptureNPC.rupturePotency += 1;
 
-                if (Main.rand.NextFloat() < 0.5f)
+                if (Main.rand.NextFloat() < 0.10f)
+                {
+                    ruptureNPC.ruptureCount += 2;
+                    ruptureNPC.rupturePotency += 1;
+                }
+                else if (Main.rand.NextFloat() < 0.60f)
                 {
                     ruptureNPC.ruptureCount += 1;
                 }
             }
 
-            if (hasApocalypseShard && ruptureNPC.ruptureCount >= 20 && Main.rand.NextFloat() < 0.2f)
+            if (hasApocalypseShard && ruptureNPC.ruptureCount >= 20 && Main.rand.NextFloat() < 0.25f)
             {
-                float radius = 15f * 16f; 
+                float radius = 15f * 16f;
                 Vector2 targetCenter = target.Center;
 
                 foreach (NPC npc in Main.npc)
@@ -111,7 +141,7 @@ namespace LimbusMod.Players
                         if (nearbyRuptureNPC.ruptureCount > 0)
                         {
                             bool hasBoneStake = Player.GetModPlayer<RupturePlayer>().hasBoneStake;
-                            float damageMultiplier = hasBoneStake ? 1.2f : 1f;
+                            float damageMultiplier = hasBoneStake ? 1.15f : 1f;
                             int trueDamage = (int)(ruptureNPC.rupturePotency * damageMultiplier);
                             npc.life -= trueDamage;
 
@@ -122,28 +152,6 @@ namespace LimbusMod.Players
                                 Dust.NewDust(npc.position, npc.width, npc.height, 160, 0f, 0f, 0, Color.Cyan, 1.5f);
                             }
                         }
-                    }
-                }
-            }
-        }
-
-        public override void PostUpdate()
-        {
-            if (hasThornyRopeCuffs)
-            {
-                thornyRopeCuffsTimer++;
-                int ticksPer12Seconds = 60 * 12;
-
-                if (thornyRopeCuffsTimer >= ticksPer12Seconds && thornyRopeCuffsApplications < 3)
-                {
-                    RuptureNPC ruptureNPC = target.GetGlobalNPC<RuptureNPC>();
-                    ruptureNPC.ruptureCount += 1; 
-                    thornyRopeCuffsApplications++;
-
-                    if (thornyRopeCuffsApplications >= 3)
-                    {
-                        thornyRopeCuffsTimer = 0;
-                        thornyRopeCuffsApplications = 0;
                     }
                 }
             }

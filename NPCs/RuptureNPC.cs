@@ -18,29 +18,31 @@ namespace LimbusMod.NPCs
         public int rupturePotency = 0; // Potency
         public int ruptureCount = 0;  // Count
         private int thrillDamageTimer = 0;
+        public int ruptureApplicationCount = 0; 
+        private int ruptureSecondTimer = 0; 
 
         public override void ResetEffects(NPC npc)
         {
-            // Enforcing rupture count limit (always 99 max)
-            if (ruptureCount > 60)
+            // Enforcing rupture count limit (always 75 max)
+            if (ruptureCount > 75)
             {
-                ruptureCount = 60;
+                ruptureCount = 75;
             }
 
             if (!Main.hardMode)
             {
-                rupturePotency = Math.Min(rupturePotency, 20);
+                rupturePotency = Math.Min(rupturePotency, 25);
             }
             else if (Main.hardMode && !NPC.downedPlantBoss)
             {
-                rupturePotency = Math.Min(rupturePotency, 40);
+                rupturePotency = Math.Min(rupturePotency, 50);
             }
             else if (NPC.downedPlantBoss)
             {
-                rupturePotency = Math.Min(rupturePotency, 60);
+                rupturePotency = Math.Min(rupturePotency, 75);
             }
 
-             if (Main.player[npc.target].GetModPlayer<RupturePlayer>().hasThrill)
+            if (Main.player[npc.target].GetModPlayer<RupturePlayer>().hasThrill)
             {
                 if (ruptureCount == 0 && rupturePotency == 0)
                 {
@@ -83,6 +85,13 @@ namespace LimbusMod.NPCs
                     thrillDamageTimer = 0;
                 }
             }
+
+            ruptureSecondTimer++;
+            if (ruptureSecondTimer >= 60)
+            {
+                ruptureSecondTimer = 0;
+                ruptureApplicationCount = 0;
+            }
         }
 
         public override void ModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
@@ -98,53 +107,46 @@ namespace LimbusMod.NPCs
 
         private void ApplyRupture(NPC npc, ref NPC.HitModifiers modifiers, Player player, int itemId, int projectileId)
         {
-            if ((itemId != -1 && LimbusMod.LimbusModExclusions.ExcludedItems.Contains(itemId)) || 
-                (projectileId != -1 && LimbusMod.LimbusModExclusions.ExcludedProjectiles.Contains(projectileId)))
+            if (projectileId != -1 && LimbusMod.LimbusModExclusions.ExcludedProjectiles.Contains(projectileId))
             {
                 return;
             }
 
-            if ((itemId != -1 && LimbusMod.LimbusModExclusions.SemiExcludedItems.Contains(itemId)) || 
-                (projectileId != -1 && LimbusMod.LimbusModExclusions.SemiExcludedProjectiles.Contains(projectileId)) &&
-                 Main.rand.NextFloat() < 0.80f)
+            if (ruptureApplicationCount >= 4)
             {
                 return;
             }
-            
+
             if (ruptureCount > 0)
             {
                 ruptureCount--;
+                ruptureApplicationCount++; 
 
-                // Check if the player has Bone Stake
                 bool hasBoneStake = player.GetModPlayer<RupturePlayer>().hasBoneStake;
-                
-                float damageMultiplier = hasBoneStake ? 1.2f : 1f;
-                int trueDamage = (int)(rupturePotency * damageMultiplier); 
-                // Apply rupture damage 
+                float damageMultiplier = hasBoneStake ? 1.15f : 1f;
+                int trueDamage = (int)(rupturePotency * damageMultiplier);
+
                 npc.life -= trueDamage;
 
-                // Small dusts when the enemy is hit
                 for (int i = 0; i < 5; i++)
                 {
                     Dust.NewDust(npc.position, npc.width, npc.height, 160, 0f, 0f, 0, Color.Cyan, 1.5f);
                 }
 
-                // Display rupture damage
                 CombatText.NewText(npc.Hitbox, Color.Cyan, trueDamage, true);
             }
 
-            // Reset potency when rupture count runs out
             if (ruptureCount <= 0)
             {
                 bool hasThornyRopeCuffs = player.GetModPlayer<RupturePlayer>().hasThornyRopeCuffs;
                 if (hasThornyRopeCuffs && rupturePotency > 8)
                 {
-                    rupturePotency = Math.Max(1, rupturePotency - 10); 
+                    rupturePotency = Math.Max(1, rupturePotency - 10);
                     ruptureCount = 1;
                 }
                 else
                 {
-                    rupturePotency = 0; 
+                    rupturePotency = 0;
                 }
             }
         }
@@ -157,14 +159,14 @@ namespace LimbusMod.NPCs
             if ((ruptureCount > 0 || rupturePotency > 0) && (!hasThrill || rupturePotency > 4))// Display only if rupture is active
             {
                 string ruptureText = $"{rupturePotency} / {ruptureCount}";
-                DynamicSpriteFont font = FontAssets.MouseText.Value; 
+                DynamicSpriteFont font = FontAssets.MouseText.Value;
                 float scale = 1.35f;
                 Vector2 textSize = font.MeasureString(ruptureText) * scale;
 
                 // Position under the NPC with automatic stacking
                 Vector2 textPosition = npc.Bottom - Main.screenPosition;
                 textPosition.Y += 10; // Adjust height under the NPC
-                textPosition.X -= textSize.X / 2; 
+                textPosition.X -= textSize.X / 2;
 
                 // Draw the text
                 spriteBatch.DrawString(font, ruptureText, textPosition, Color.Cyan, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);

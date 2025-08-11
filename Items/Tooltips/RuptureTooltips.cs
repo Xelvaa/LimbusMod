@@ -10,12 +10,14 @@ namespace LimbusMod.Items.Tooltips
     {
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            // Tooltips existants
+            // Tooltips 
             if (item.type == ItemID.CobaltSword)
             {
                 int rupturePotency = 2;
                 string text = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.RupturePotency", rupturePotency);
+                string cobaltText = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.CobaltSword");
                 tooltips.Add(new TooltipLine(Mod, "Rupture", text));
+                tooltips.Add(new TooltipLine(Mod, "Cobalt", cobaltText));
             }
 
             if (item.type == ItemID.NightsEdge)
@@ -27,6 +29,27 @@ namespace LimbusMod.Items.Tooltips
 
                 string additionalText = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.NightEdge");
                 TooltipLine additionalTooltip = new TooltipLine(Mod, "NightEdgeExtra", additionalText);
+
+                int potencyIndex = tooltips.IndexOf(potencyTooltip);
+                if (potencyIndex != -1)
+                {
+                    tooltips.Insert(potencyIndex + 1, additionalTooltip);
+                }
+                else
+                {
+                    tooltips.Add(additionalTooltip);
+                }
+            }
+
+            if (item.type == ItemID.TrueNightsEdge)
+            {
+                int rupturePotency = 2;
+                string potencyText = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.RupturePotency", rupturePotency);
+                TooltipLine potencyTooltip = new TooltipLine(Mod, "RupturePotency", potencyText);
+                tooltips.Add(potencyTooltip);
+
+                string additionalText = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.TrueNightEdge");
+                TooltipLine additionalTooltip = new TooltipLine(Mod, "TrueNightEdgeExtra", additionalText);
 
                 int potencyIndex = tooltips.IndexOf(potencyTooltip);
                 if (potencyIndex != -1)
@@ -71,25 +94,30 @@ namespace LimbusMod.Items.Tooltips
 
             if (item.type == ItemID.TerraBlade)
             {
-                int rupturePotency = 1; 
-                int ruptureCount = 3;   
+                int rupturePotency = 1;
+                int ruptureCount = 3;
                 string text = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.RuptureMelee", rupturePotency, ruptureCount);
+                string terraText = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.TerraBlade");
                 tooltips.Add(new TooltipLine(Mod, "Rupture", text));
+                tooltips.Add(new TooltipLine(Mod, "RuptureExcalibur", terraText));
             }
 
-            // Nouveaux tooltips pour les items liés aux projectiles
             if (item.type == ItemID.Excalibur)
             {
                 int rupturePotency = 2;
                 string text = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.RupturePotency", rupturePotency);
+                string excaliburText = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.Excalibur");
                 tooltips.Add(new TooltipLine(Mod, "Rupture", text));
+                tooltips.Add(new TooltipLine(Mod, "RuptureExcalibur", excaliburText));
             }
 
             if (item.type == ItemID.TrueExcalibur)
             {
                 int rupturePotency = 2;
                 string text = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.RupturePotency", rupturePotency);
+                string excaliburText = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.TrueExcalibur");
                 tooltips.Add(new TooltipLine(Mod, "Rupture", text));
+                tooltips.Add(new TooltipLine(Mod, "RuptureExcalibur", excaliburText));
             }
 
             if (item.type == ItemID.Code1)
@@ -176,6 +204,41 @@ namespace LimbusMod.Items.Tooltips
             {
                 int ruptureCount = 2;
                 string text = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.RuptureCount", ruptureCount);
+                tooltips.Add(new TooltipLine(Mod, "Rupture", text));
+            }
+
+            if (item.type == ItemID.HolyArrow)
+            {
+                int rupturePotencyChance = 50;
+                string text = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.RupturePotencyChance", rupturePotencyChance);
+                tooltips.Add(new TooltipLine(Mod, "Rupture", text));
+            }
+
+            if (item.type == ItemID.CursedBullet)
+            {
+                int rupturePotencyChance = 50;
+                string text = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.RupturePotencyChance", rupturePotencyChance);
+                tooltips.Add(new TooltipLine(Mod, "Rupture", text));
+            }
+
+            if (item.type == ItemID.CursedArrow)
+            {
+                int rupturePotencyChance = 50;
+                string text = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.RupturePotencyChance", rupturePotencyChance);
+                tooltips.Add(new TooltipLine(Mod, "Rupture", text));
+            }
+
+            if (item.type == ItemID.ShimmerArrow)
+            {
+                int rupturePotencyChance = 50;
+                string text = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.RupturePotencyChance", rupturePotencyChance);
+                tooltips.Add(new TooltipLine(Mod, "Rupture", text));
+            }
+
+            if (item.type == ItemID.JestersArrow)
+            {
+                int rupturePotencyChance = 50;
+                string text = Language.GetTextValue("Mods.LimbusMod.CommonItemTooltip.RupturePotencyChance", rupturePotencyChance);
                 tooltips.Add(new TooltipLine(Mod, "Rupture", text));
             }
 
